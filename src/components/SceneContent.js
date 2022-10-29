@@ -1,15 +1,18 @@
 // import { createRoot } from 'react-dom/client';
-import React from 'react'
+import React, { useRef } from 'react'
 // import React, { useRef, useState } from 'react'
 // import { Canvas, useFrame } from '@react-three/fiber'
 // import { Scene } from 'three';
-import { useLoader } from '@react-three/fiber'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { useLoader } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { OrbitControls } from "@react-three/drei";
-import beduerfnisSpace from '../3dFiles/beduerfnis_space.gltf'
+// import beduerfnisSpace from '../3dFiles/beduerfnis_space.gltf';
+import beduerfnisSpace from '../3dFiles/beduerfnis_space_2.0.glb'
 
 // import { useGLTF } from "@react-three/drei"
 
+const deg2rad = degrees => degrees * (Math.PI / 180);
 
 export default function SceneContent(){
   return(
@@ -20,14 +23,23 @@ export default function SceneContent(){
         <Box position={[1.2, 0, 0]} /> */}
         <OrbitControls />
         <Room />
+        <Grundriss />
     </>
     
   )
 }
 
 function Room(){
-  // const gltf = useLoader(GLTFLoader, "../3dFiles/beduerfnis_space.gltf");
-  const gltf = useLoader(GLTFLoader, beduerfnisSpace);
+  const gltf = useLoader(
+    GLTFLoader,
+    beduerfnisSpace,
+    loader => {
+      const dracoLoader = new DRACOLoader();
+      dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
+      loader.setDRACOLoader(dracoLoader);
+    }
+  );
+
   return (
     <>
       <primitive object={gltf.scene} scale={0.5} />
@@ -35,27 +47,22 @@ function Room(){
   );
 };
 
-// function Box(props) {
-//     // This reference will give us direct access to the mesh
-//     const mesh = useRef()
-//     // Set up state for the hovered and active state
-//     const [hovered, setHover] = useState(false)
-//     const [active, setActive] = useState(false)
-//     // Subscribe this component to the render-loop, rotate the mesh every frame
-//     useFrame((state, delta) => (mesh.current.rotation.x += 0.01))
-//     // Return view, these are regular three.js elements expressed in JSX
-//     return (
-//       <mesh
-//         {...props}
-//         ref={mesh}
-//         scale={active ? 1.5 : 1}
-//         onClick={(event) => setActive(!active)}
-//         onPointerOver={(event) => setHover(true)}
-//         onPointerOut={(event) => setHover(false)}>
-//         <boxGeometry args={[1, 1, 1]} />
-//         <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-//       </mesh>
-//     )
-//   }
-  
 
+function Grundriss(){
+  const mesh = useRef()
+  return (
+    <mesh
+      // {...props}
+      ref={mesh}
+      // rotateY={deg2rad(90)}
+      rotateZ={deg2rad(90)}
+      // scale={1}
+      // onClick={(event) => setActive(!active)}
+      // onPointerOver={(event) => setHover(true)}
+      // onPointerOut={(event) => setHover(false)}
+      >
+      <planeGeometry args={[1, 1]} />
+      <meshStandardMaterial color={'orange'} />
+    </mesh>
+  )
+}
