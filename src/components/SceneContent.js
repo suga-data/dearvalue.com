@@ -1,5 +1,6 @@
 // import { createRoot } from 'react-dom/client';
 import React, { useRef } from 'react'
+import * as THREE from 'three'
 // import React, { useRef, useState } from 'react'
 // import { Canvas, useFrame } from '@react-three/fiber'
 // import { Scene } from 'three';
@@ -9,6 +10,7 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { OrbitControls } from "@react-three/drei";
 // import beduerfnisSpace from '../3dFiles/beduerfnis_space.gltf';
 import beduerfnisSpace from '../3dFiles/beduerfnis_space_2.0.glb'
+import img from '../img/grundriss_square.png'
 
 // import { useGLTF } from "@react-three/drei"
 
@@ -50,19 +52,20 @@ function Room(){
 
 function Grundriss(){
   const mesh = useRef()
+  const texture = useLoader(THREE.TextureLoader, img)
   return (
     <mesh
       // {...props}
       ref={mesh}
       // rotateY={deg2rad(90)}
-      rotateZ={deg2rad(90)}
-      // scale={1}
+      rotation-x={deg2rad(-90)}
+      scale={5}
       // onClick={(event) => setActive(!active)}
       // onPointerOver={(event) => setHover(true)}
       // onPointerOut={(event) => setHover(false)}
       >
       <planeGeometry args={[1, 1]} />
-      <meshStandardMaterial color={'orange'} />
+      <meshStandardMaterial attach="material" map={texture} />
     </mesh>
   )
 }
