@@ -9,7 +9,8 @@ import Info from './components/Info'
 
 const canvasStyle = {
   height: "100vh",
-  width: "100vw"
+  width: "100vw",
+  // backgroundColor: "black"
 }
 
 function App() {
