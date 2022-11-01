@@ -5,6 +5,7 @@ import SceneContent from './components/SceneContent';
 import { Canvas } from '@react-three/fiber'
 import CookiePopup from './components/Cookies';
 import Info from './components/Info'
+import './App.css'
 
 
 const canvasStyle = {
@@ -16,7 +17,7 @@ const canvasStyle = {
 function App() {
   // Scene();
   return (
-    <>
+    <div id='root'>
       <CookiePopup/>
       <Info/>
       <div id="canvas-container" style={canvasStyle}>
@@ -24,10 +25,11 @@ function App() {
           <SceneContent/>
         </Canvas>
       </div>
-    </>
+    </div>
   )
 }
 
 export default App;
 
 // ReactDOM.render(<App />, document.getElementById('root'))
+

@@ -1,9 +1,11 @@
 import infoSVG from "../../img/info.svg"
 import closeInfoSVG from "../../img/closeInfo.svg"
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import generetedText from '../../json/text.json'
 
 export default function Info(){
     const [infoClicked, setInfoClicked] = useState(false);
+    const dearValueRef = useRef(null)
     const infoButton = {
         position: "fixed",
         bottom: "0",
@@ -38,36 +40,58 @@ export default function Info(){
     }
     const infoContent = {
         margin: "20px",
-        marginBottom: "100px"
+        marginBottom: "100px",
+
+    }
+    const newTextButtonParent = {
+        width: "100%",
+        textAlign: "center",
+        marginTop: "50px",
+    }
+    const newTextButton = {
+        backgroundColor: "white",
+        // padding: "10px",
+        curser: "default",
+        display: "inline-block",
+        verticalAlign: "top",
+        margin: "20px",
+        fontSize: "20px"
     }
 
     function showHideInfo(){
+        newText();
+        // console.log()
         setInfoClicked(infoClicked ? false : true)
 
     }
 
+
+    const [num, setNum] = useState(0);
+
+    function randomNumberInRange(min, max) {
+      // 👇️ get number between min (inclusive) and max (inclusive)
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function newText(){
+        setNum(randomNumberInRange(0, generetedText.length-1));
+        dearValueRef.current.scrollIntoView();
+    }
+
+
     return(
         <>
-            <img src={infoClicked ? closeInfoSVG : infoSVG} alt="info" style={infoButton} onClick={showHideInfo}/>
-            <div style={infoClicked ? infoContainer : hide}>
-                <div style={infoContent}>
-                    <h1>Dear Value, </h1>
+            <img className="infoImage" src={infoClicked ? closeInfoSVG : infoSVG} alt="info" style={infoButton} onClick={showHideInfo}/>
+            <div  style={infoClicked ? infoContainer : hide}>
+                <div ref={dearValueRef} style={infoContent}>
+                    <h1 >Dear Value, </h1>
                     <p>
-                        Sed imperdiet eros maximus, faucibus ante eu, eleifend metus. Vivamus semper mauris in sodales pellentesque. Aliquam suscipit lacus sit amet tellus dignissim, non laoreet quam vulputate. Morbi in libero tortor. Praesent fringilla erat lectus, vitae consequat est consequat ut. Maecenas ligula nunc, egestas eu efficitur efficitur, gravida sed purus. Aliquam a ante viverra, dignissim ex vitae, imperdiet tortor. Integer ut leo ac massa convallis venenatis in sed massa. Donec ultrices faucibus massa. Nam tincidunt lorem ut ante ullamcorper porttitor. Duis eleifend dolor id dolor pretium pharetra. Aliquam risus odio, laoreet vel lacinia sit amet, sodales id enim. Nunc vel tempus felis, ac pharetra quam. Quisque interdum dignissim enim. Nulla semper placerat magna, sed efficitur massa malesuada non. Vivamus at metus congue, accumsan lacus consequat, tristique magna.
-                        Sed imperdiet eros maximus, faucibus ante eu, eleifend metus. Vivamus semper mauris in sodales pellentesque. Aliquam suscipit lacus sit amet tellus dignissim, non laoreet quam vulputate. Morbi in libero tortor. Praesent fringilla erat lectus, vitae consequat est consequat ut. Maecenas ligula nunc, egestas eu efficitur efficitur, gravida sed purus. Aliquam a ante viverra, dignissim ex vitae, imperdiet tortor. Integer ut leo ac massa convallis venenatis in sed massa. Donec ultrices faucibus massa. Nam tincidunt lorem ut ante ullamcorper porttitor. Duis eleifend dolor id dolor pretium pharetra. Aliquam risus odio, laoreet vel lacinia sit amet, sodales id enim. Nunc vel tempus felis, ac pharetra quam. Quisque interdum dignissim enim. Nulla semper placerat magna, sed efficitur massa malesuada non. Vivamus at metus congue, accumsan lacus consequat, tristique magna.
-                        Sed imperdiet eros maximus, faucibus ante eu, eleifend metus. Vivamus semper mauris in sodales pellentesque. Aliquam suscipit lacus sit amet tellus dignissim, non laoreet quam vulputate. Morbi in libero tortor. Praesent fringilla erat lectus, vitae consequat est consequat ut. Maecenas ligula nunc, egestas eu efficitur efficitur, gravida sed purus. Aliquam a ante viverra, dignissim ex vitae, imperdiet tortor. Integer ut leo ac massa convallis venenatis in sed massa. Donec ultrices faucibus massa. Nam tincidunt lorem ut ante ullamcorper porttitor. Duis eleifend dolor id dolor pretium pharetra. Aliquam risus odio, laoreet vel lacinia sit amet, sodales id enim. Nunc vel tempus felis, ac pharetra quam. Quisque interdum dignissim enim. Nulla semper placerat magna, sed efficitur massa malesuada non. Vivamus at metus congue, accumsan lacus consequat, tristique magna.
+                        {generetedText[num].output}
                     </p>
-                    <h2>Impressum - Angaben gemäß § 5 TMG </h2>
-                    <p>
-                        egozen collective <br/>
-                        Karlstr. 25<br/>
-                        63065 Offenbach<br/>
-                    </p>
-
-                    <h3>Kontakt</h3>
-                    <p>
-                    hello@egozen.org <br/><br/>
-                    </p>
+                    <p>Sincerely, me</p>
+                    <div style={newTextButtonParent}>
+                        <button style={newTextButton} onClick={newText}>re-calculate value</button>
+                    </div>
 
                     <h2>Datenschutz</h2>
                     <h4>Allgemeine Hinweise</h4>
@@ -83,6 +107,24 @@ export default function Info(){
                         Diese Web-Applikation speichert kein personenbezogene Daten oder Cookies. 
                         Es werden keine Daten an Dritte weitergegeben.
                     </p>
+
+
+                    <h2>Impressum - Angaben gemäß § 5 TMG </h2>
+                    <p>
+                        egozen collective <br/>
+                        Karlstr. 25<br/>
+                        63065 Offenbach<br/>
+                    </p>
+                    <h4>Vertreten durch</h4>
+                    <p>
+                        Armin Arndt, Beatrice Bianchini, Valeria Castaño Moreno, Roberto Lorenzon, Erika Lowin & Ken Rodenwaldt
+                    </p>
+
+                    <h3>Kontakt</h3>
+                    <p>
+                    hello@egozen.org <br/><br/>
+                    </p>
+
                 </div>
             </div>
         </>

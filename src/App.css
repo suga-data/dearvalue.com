@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+
+h2 {
+  padding-top: 50px;
+}
+h4 {
+  margin-bottom: 0px;
+}
+button:hover{
+  cursor: pointer;
+}
+.infoImage:hover{
+  cursor: pointer;
+}
+
+#root{
+  white-space: pre-line;
+}
