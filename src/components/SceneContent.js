@@ -1,5 +1,5 @@
 // import { createRoot } from 'react-dom/client';
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 // import React, { useRef, useState } from 'react'
 // import { Canvas, useFrame } from '@react-three/fiber'
@@ -103,7 +103,7 @@ function randomNum(min, max){
 }
 function TextPlane(){
   // const texture = useLoader(THREE.TextureLoader, img)
-  const [upside, setUpside] = useState(true)
+  // const [upside, setUpside] = useState(true)
 
   const num = randomNum(0, text.length-1) 
   useEffect(() =>{
