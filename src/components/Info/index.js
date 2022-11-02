@@ -2,6 +2,7 @@ import infoSVG from "../../img/info.svg"
 import closeInfoSVG from "../../img/closeInfo.svg"
 import { useState, useRef } from 'react';
 import generetedText from '../../json/text.json'
+import patentImage from '../../img/patens_thermo_print.png'
 
 export default function Info(){
     const [infoClicked, setInfoClicked] = useState(false);
@@ -58,6 +59,11 @@ export default function Info(){
         fontSize: "20px"
     }
 
+    const center = {
+        display: "inline-block",
+        verticalAlign: "top",
+        width: "100%"
+    }
     function showHideInfo(){
         newText();
         // console.log()
@@ -93,11 +99,12 @@ export default function Info(){
                         <button style={newTextButton} onClick={newText}>re-calculate value</button>
                     </div>
 
-                    <h2>Datenschutz</h2>
-                    <h4>Allgemeine Hinweise</h4>
+                    {/* <h2>Datenschutz</h2> */}
+                    {/* <h4>Allgemeine Hinweise</h4>
                     <p>
                         Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.
-                    </p>
+                    </p> */}
+                    <img src={patentImage} style={center} alt="patentImage"/>
                     <h4>Datenerfassung auf dieser Website</h4>
                     <p>
                         Eine Erfassung von Daten erfolgt zu meist automatisch, sobald Sie eine Website betreten. In der Regel handelt es sich um technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Oft werden personenbezogene Daten an Dritte weitergegeben (z.B. Google, Facebook).

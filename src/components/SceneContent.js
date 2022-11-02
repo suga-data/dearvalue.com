@@ -1,5 +1,5 @@
 // import { createRoot } from 'react-dom/client';
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import * as THREE from 'three'
 // import React, { useRef, useState } from 'react'
 // import { Canvas, useFrame } from '@react-three/fiber'
@@ -7,13 +7,14 @@ import * as THREE from 'three'
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { OrbitControls, Text } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 // import beduerfnisSpace from '../3dFiles/beduerfnis_space.gltf';
-import beduerfnisSpace from '../3dFiles/beduerfnis_space_3.0.glb'
+import beduerfnisSpace from '../3dFiles/beduerfnis_space8.glb'
+
 import img from '../img/grundriss_square.png'
 // import img from '../img/grundriss-svg.svg'
 
-import text from '../json/text.json'
+// import text from '../json/text.json'
 
 // import { useGLTF } from "@react-three/drei"
 
@@ -29,8 +30,8 @@ export default function SceneContent(){
         <OrbitControls />
         <Room />
         <Grundriss />
-        <PlaneWhite/>
-        <TextPlane/>
+        {/* <PlaneWhite/> */}
+        {/* <TextPlane/> */}
     </>
     
   )
@@ -58,7 +59,7 @@ function Room(){
 
   return (
     <mesh>
-      <primitive object={gltf.scene} scale={0.5}  />
+      <primitive object={gltf.scene} scale={1} position-y={0.01} />
     </mesh>
   );
 };
@@ -98,67 +99,70 @@ function Grundriss(){
 
 
 
-function randomNum(min, max){
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-function TextPlane(){
-  // const texture = useLoader(THREE.TextureLoader, img)
-  // const [upside, setUpside] = useState(true)
+// function randomNum(min, max){
+//   return Math.floor(Math.random() * (max - min + 1)) + min;
+// }
 
-  const num = randomNum(0, text.length-1) 
-  useEffect(() =>{
 
-  })
+
+// function TextPlane(){
+//   // const texture = useLoader(THREE.TextureLoader, img)
+//   // const [upside, setUpside] = useState(true)
+
+//   const num = randomNum(0, text.length-1) 
+//   useEffect(() =>{
+
+//   })
   
-  return(
-    <mesh>
-      {/* <textGeometry args={[]}/> */}
-      <Text scale={[5,5,5]} 
-            rotation-x={deg2rad(90)}
-            position-y={-0.01}
-            color="black" 
-            anchorX="center" 
-            anchorY="middle" 
-            maxWidth={1} 
-            whiteSpace="normal" 
-            fontSize={0.04}
-            // overflowWrap={}
-            >
-        {text[num].output}
-      </Text>
+//   return(
+//     <mesh>
+//       {/* <textGeometry args={[]}/> */}
+//       <Text scale={[5,5,5]} 
+//             rotation-x={deg2rad(90)}
+//             position-y={-0.01}
+//             color="black" 
+//             anchorX="center" 
+//             anchorY="middle" 
+//             maxWidth={1} 
+//             whiteSpace="normal" 
+//             fontSize={0.04}
+//             // overflowWrap={}
+//             >
+//         {text[num].output}
+//       </Text>
 
-      {/* <planeGeometry
-        color={'white'}
-        toneMapped={false}
-        map={texture}
-      /> */}
-    </mesh>
-  )
+//       {/* <planeGeometry
+//         color={'white'}
+//         toneMapped={false}
+//         map={texture}
+//       /> */}
+//     </mesh>
+//   )
 
-}
+// }
 
 
-function PlaneWhite(){
-  const mesh = useRef()
+// function PlaneWhite(){
+//   const mesh = useRef()
 
-  return (
-    <mesh
-      // {...props}
-      ref={mesh}
-      // rotateY={deg2rad(90)}
-      rotation-x={deg2rad(-90)}
-      scale={50}
-      position-y={-0.015}
-      // onClick={(event) => setActive(!active)}
-      // onPointerOver={(event) => setHover(true)}
-      // onPointerOut={(event) => setHover(false)}
-      >
-      <planeGeometry args={[10, 10]} />
+//   return (
+//     <mesh
+//       // {...props}
+//       ref={mesh}
+//       // rotateY={deg2rad(90)}
+//       rotation-x={deg2rad(-90)}
+//       scale={50}
+//       position-y={-0.015}
+//       // onClick={(event) => setActive(!active)}
+//       // onPointerOver={(event) => setHover(true)}
+//       // onPointerOut={(event) => setHover(false)}
+//       >
+//       <planeGeometry args={[10, 10]} />
        
-      <meshBasicMaterial
-        color={'white'} 
-        toneMapped={false}
-        />
-    </mesh>
-  )
-}
+//       <meshBasicMaterial
+//         color={'white'} 
+//         toneMapped={false}
+//         />
+//     </mesh>
+//   )
+// }
