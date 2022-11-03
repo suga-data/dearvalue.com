@@ -1,3 +1,21 @@
+@font-face {
+  font-family: "FT88-Regular";
+  /* font-style: regular */
+  src:  url("./fonts/FT88-Regular.woff2") format("woff2");
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family: "FT88-regular";
+  margin-top: 60px;
+}
+h1 {
+  margin-top: 0px;
+}
+
+p, button {
+  font-family: "FT88-regular";
+}
+
 .App {
   text-align: center;
 }

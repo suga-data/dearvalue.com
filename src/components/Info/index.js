@@ -2,7 +2,7 @@ import infoSVG from "../../img/info.svg"
 import closeInfoSVG from "../../img/closeInfo.svg"
 import { useState, useRef } from 'react';
 import generetedText from '../../json/text.json'
-import patentImage from '../../img/patens_thermo_print.png'
+// import patentImage from '../../img/patens_thermo_print.png'
 
 export default function Info(){
     const [infoClicked, setInfoClicked] = useState(false);
@@ -61,11 +61,11 @@ export default function Info(){
         fontSize: "20px"
     }
 
-    const center = {
-        display: "inline-block",
-        verticalAlign: "top",
-        width: "100%"
-    }
+    // const center = {
+    //     display: "inline-block",
+    //     verticalAlign: "top",
+    //     width: "100%"
+    // }
 
     
     
@@ -133,7 +133,7 @@ export default function Info(){
                     <p>
                         Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.
                     </p> */}
-                    <img src={patentImage} style={center} alt="patentImage"/>
+                    {/* <img src={patentImage} style={center} alt="patentImage"/> */}
                     <h4>Datenerfassung auf dieser Website</h4>
                     <p>
                         Eine Erfassung von Daten erfolgt zu meist automatisch, sobald Sie eine Website betreten. In der Regel handelt es sich um technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Oft werden personenbezogene Daten an Dritte weitergegeben (z.B. Google, Facebook).
@@ -145,7 +145,7 @@ export default function Info(){
                     </p>
 
 
-                    <h2>Impressum - Angaben gemäß § 5 TMG </h2>
+                    <h4>Impressum - Angaben gemäß § 5 TMG </h4>
                     <p>
                         egozen collective <br/>
                         Karlstr. 25<br/>
@@ -156,7 +156,7 @@ export default function Info(){
                         Armin Arndt, Beatrice Bianchini, Valeria Castaño Moreno, Roberto Lorenzon, Erika Lowin & Ken Rodenwaldt
                     </p>
 
-                    <h3>Kontakt</h3>
+                    <h4>Kontakt</h4>
                     <p>
                     hello@egozen.org <br/><br/>
                     </p>
