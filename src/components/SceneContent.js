@@ -4,14 +4,15 @@ import * as THREE from 'three'
 // import React, { useRef, useState } from 'react'
 // import { Canvas, useFrame } from '@react-three/fiber'
 // import { Scene } from 'three';
-import { useLoader } from '@react-three/fiber';
+import { useLoader, useFrame, useThree } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 // import beduerfnisSpace from '../3dFiles/beduerfnis_space.gltf';
 import beduerfnisSpace from '../3dFiles/beduerfnis_space8.glb'
 
 import img from '../img/grundriss_square.png'
+import { Camera } from 'three';
 // import img from '../img/grundriss-svg.svg'
 
 // import text from '../json/text.json'
@@ -21,6 +22,15 @@ import img from '../img/grundriss_square.png'
 const deg2rad = degrees => degrees * (Math.PI / 180);
 
 export default function SceneContent(){
+  const meshRef = useRef();
+
+  useFrame(() => {
+    meshRef.current.rotation.y += 0.005;
+  });
+
+  // useThree(({camera}) => {
+  // });
+
   return(
     <>
         <ambientLight />
@@ -28,8 +38,20 @@ export default function SceneContent(){
         {/* <Box position={[-1.2, 0, 0]} />
         <Box position={[1.2, 0, 0]} /> */}
         <OrbitControls />
-        <Room />
-        <Grundriss />
+        <PerspectiveCamera 
+            makeDefault 
+            // manual 
+            near={1}
+            far={100}
+            position={[0, 5, 5]}
+
+
+          />
+
+        <mesh ref={meshRef}>
+          <Room />
+          {/* <Grundriss /> */}
+        </mesh>
         {/* <PlaneWhite/> */}
         {/* <TextPlane/> */}
     </>
@@ -49,11 +71,11 @@ function Room(){
   );
   gltf.scene.traverse( function( object ) {
     if ( object.isMesh ) {
-        object.material.color.set( 0x000000 );
-        // object.material.color.set( 0xffffff );
+        // object.material.color.set( 0x000000 );
+        object.material.color.set( 0xffffff );
         object.material.transparent = true;
         object.material.opacity = 0.5;
-        // object.material.wireframe = true;
+        object.material.wireframe = true;
     }
   })
 
