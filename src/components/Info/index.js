@@ -7,6 +7,8 @@ import patentImage from '../../img/patens_thermo_print.png'
 export default function Info(){
     const [infoClicked, setInfoClicked] = useState(false);
     const dearValueRef = useRef(null)
+    const generatedTextContainer = useRef(10)
+
     const infoButton = {
         position: "fixed",
         bottom: "0",
@@ -64,25 +66,50 @@ export default function Info(){
         verticalAlign: "top",
         width: "100%"
     }
+
+    
+    
+    function randomNumberInRange(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    
+    
+    
+    const [num, setNum] = useState(0);
+    // const [maxGentTextHeight, setMaxGenTextHeight] = useState();
+    
+    const textContainer = {
+        // height: genTextHeight + "px",
+        // height: "60px",
+        color: "black",
+        overflow: "hidden",
+    }
+    const genTextChild = {
+        // height: maxGentTextHeight + "px",
+        // color: "black",
+    }
+    
     function showHideInfo(){
         newText();
-        // console.log()
         setInfoClicked(infoClicked ? false : true)
-
     }
-
-
-    const [num, setNum] = useState(0);
-
-    function randomNumberInRange(min, max) {
-      // 👇️ get number between min (inclusive) and max (inclusive)
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
+    
     function newText(){
+        // define random number
         setNum(randomNumberInRange(0, generetedText.length-1));
+        // read height of text container
+        // const distanceTop = generatedTextContainer.current.getBoundingClientRect().top;
+        // const distanceBottom = generatedTextContainer.current.getBoundingClientRect().bottom;
+        // const sizeOfContainer = distanceBottom - distanceTop;
+        // setMaxGenTextHeight(sizeOfContainer)
+        // console.log("height of Container: " + maxGentTextHeight)
         dearValueRef.current.scrollIntoView();
     }
+        
+
+
+
+
 
 
     return(
@@ -91,10 +118,12 @@ export default function Info(){
             <div  style={infoClicked ? infoContainer : hide}>
                 <div ref={dearValueRef} style={infoContent}>
                     <h1 >Dear Value, </h1>
-                    <p>
-                        {generetedText[num].output}
-                    </p>
-                    <p>Sincerely, me</p>
+                    <div className="letter" style={textContainer}> 
+                        <p  ref={generatedTextContainer} style={genTextChild}>
+                            {generetedText[num].output}
+                        </p>
+                        <p>Sincerely, me</p>
+                    </div>
                     <div style={newTextButtonParent}>
                         <button style={newTextButton} onClick={newText}>re-calculate value</button>
                     </div>
